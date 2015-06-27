@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    require(['domReady'], function (domReady) {
+    require(['domReady', 'thebuggenie/tbg'], function (domReady, TBG) {
         domReady(function () {
             TBG.Modules.mailing.saveIncomingEmailAccount = function(url) {
                 TBG.Main.Helpers.ajax(url, {
