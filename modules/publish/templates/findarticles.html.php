@@ -1,7 +1,7 @@
 <?php
 
-    include_component('publish/wikibreadcrumbs');
     \thebuggenie\core\framework\Context::loadLibrary('publish/publish');
+    include_component('publish/wikibreadcrumbs');
     $tbg_response->setTitle($article_name);
 
 ?>
@@ -32,7 +32,7 @@
             <ul class="simple_list wiki-find-articles-list">
                 <?php foreach ($articles as $article): ?>
                 <li style="margin-bottom: 0;">
-                    <?php echo link_tag(make_url('publish_article', array('article_name' => $article->getName())), $article->getName(), array('style' => 'font-size: 1.1em;')); ?><br>
+                    <?php echo link_tag(make_url('publish_article', array('article_name' => $article->getName())), get_spaced_name($article->getName()), array('style' => 'font-size: 1.1em;')); ?><br>
                     <div class="faded_out"><?php echo __('Last updated %updated_at', array('%updated_at' => tbg_formatTime($article->getLastUpdatedDate(), 6))); ?></div>
                     <div class="article_preview">
                         <?php echo tbg_truncateText($article->getContent()); ?>

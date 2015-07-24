@@ -1,7 +1,7 @@
 <?php
 
-    include_component('publish/wikibreadcrumbs', array('article_name' => $article_name, 'edit' => true));
     \thebuggenie\core\framework\Context::loadLibrary('publish/publish');
+    include_component('publish/wikibreadcrumbs', array('article_name' => $article_name, 'edit' => true));
     $tbg_response->setTitle(__('Editing %article_name', array('%article_name' => $article_name)));
 
 ?>

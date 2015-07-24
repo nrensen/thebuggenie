@@ -19,7 +19,7 @@
         <?php else: ?>
             <?php echo (!empty($children)) ? image_tag('icon_folder.png', array(), false, 'publish') : image_tag('icon_article.png', array(), false, 'publish'); ?>
         <?php endif; ?>
-        <span><?php echo $main_article->getManualName(); ?></span>
+        <span><?php echo get_spaced_name($main_article->getManualName()); ?></span>
     </a>
     <?php if ($is_parent || $is_selected): ?>
         <ul>
