@@ -2,9 +2,9 @@
     <ul>
         <?php foreach ($articles as $article): ?>
             <li>
-                <?php echo link_tag(make_url('publish_article', array('article_name' => $article->getName())), $article->getName()); ?>
+                <?php echo link_tag(make_url('publish_article', array('article_name' => $article->getName())), get_spaced_name($article->getName())); ?>
                 <?php if (!isset($include_redirects) || $include_redirects == true): ?>
-                    <?php if ($article->isRedirect()) echo ' &rArr; ' . link_tag(make_url('publish_article', array('article_name' => $article->getRedirectArticleName())), $article->getRedirectArticleName()); ?>
+                    <?php if ($article->isRedirect()) echo ' &rArr; ' . link_tag(make_url('publish_article', array('article_name' => $article->getRedirectArticleName())), get_spaced_name($article->getRedirectArticleName())); ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>

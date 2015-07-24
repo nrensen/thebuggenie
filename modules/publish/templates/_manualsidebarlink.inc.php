@@ -18,7 +18,7 @@
     <?php else: ?>
         <?php echo (!empty($children)) ? image_tag('icon_folder.png', array(), false, 'publish') : image_tag('icon_article.png', array(), false, 'publish'); ?>
     <?php endif; ?>
-    <?php echo link_tag(make_url('publish_article', array('article_name' => $main_article->getName())), $main_article->getManualName()); ?>
+    <?php echo link_tag(make_url('publish_article', array('article_name' => $main_article->getName())), get_spaced_name($main_article->getManualName())); ?>
     <?php if ($is_parent || $is_selected): ?>
         <ul>
             <?php foreach ($children as $child_article): ?>

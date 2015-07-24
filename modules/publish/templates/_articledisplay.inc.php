@@ -6,7 +6,7 @@
     <?php if ($show_details && $show_article): ?>
         <div class="details">
             <?php if (isset($redirected_from)): ?>
-                <div class="redirected_from">&rarr; <?php echo __('Redirected from %article_name', array('%article_name' => link_tag(make_url('publish_article_edit', array('article_name' => $redirected_from)), $redirected_from))); ?></div>
+                <div class="redirected_from">&rarr; <?php echo __('Redirected from %article_name', array('%article_name' => link_tag(make_url('publish_article_edit', array('article_name' => $redirected_from)), get_spaced_name($redirected_from)))); ?></div>
             <?php endif; ?>
             <?php echo __('Last updated at %time, by %user', array('%time' => tbg_formatTime($article->getPostedDate(), 3), '%user' => '<b>'.(($article->getAuthor() instanceof \thebuggenie\core\entities\common\Identifiable) ? '<a href="javascript:void(0);" onclick="TBG.Main.Helpers.Backdrop.show(\'' . make_url('get_partial_for_backdrop', array('key' => 'usercard', 'user_id' => $article->getAuthor()->getID())) . '\');" class="faded_out">' . $article->getAuthor()->getName() . '</a>' : __('System')).'</b>')); ; ?>
         </div>
@@ -22,7 +22,7 @@
             <div class="header"><?php echo __('Subcategories'); ?></div>
             <ul class="category_list">
                 <?php foreach ($article->getSubCategories() as $subcategory): ?>
-                    <li><?php echo link_tag(make_url('publish_article', array('article_name' => $subcategory->getName())), $subcategory->getCategoryName()); ?></li>
+                    <li><?php echo link_tag(make_url('publish_article', array('article_name' => $subcategory->getName())), get_spaced_name($subcategory->getCategoryName())); ?></li>
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
@@ -35,7 +35,7 @@
             <div class="header"><?php echo __('Pages in this category'); ?></div>
             <ul class="category_list">
                 <?php foreach ($article->getCategoryArticles() as $categoryarticle): ?>
-                    <li><?php echo link_tag(make_url('publish_article', array('article_name' => $categoryarticle->getName())), $categoryarticle->getSpacedName()); ?></li>
+                    <li><?php echo link_tag(make_url('publish_article', array('article_name' => $categoryarticle->getName())), get_spaced_name($categoryarticle->getName())); ?></li>
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
@@ -50,7 +50,7 @@
         <?php echo __('Categories:'); ?>
         <?php $category_links = array(); ?>
         <?php foreach ($article->getCategories() as $category): ?>
-            <?php $category_links[] = link_tag(make_url('publish_article', array('article_name' => 'Category:'.$category)), $category); ?>
+            <?php $category_links[] = link_tag(make_url('publish_article', array('article_name' => 'Category:'.$category)), get_spaced_name($category)); ?>
         <?php endforeach; ?>
         <?php echo join(', ', $category_links); ?>
     </div>

@@ -72,7 +72,7 @@
                 <span class="parent_article_name <?php if (!$article->getParentArticle() instanceof \thebuggenie\modules\publish\entities\Article) echo ' faded_out'; ?>">
                     <span id="parent_article_name_span">
                         <?php if ($article->getParentArticle() instanceof \thebuggenie\modules\publish\entities\Article): ?>
-                            <?php echo ($article->getParentArticle()->getManualName()) ? $article->getParentArticle()->getManualName() : $article->getParentArticle()->getName(); ?>
+                            <?php echo get_spaced_name($article->getParentArticle()->getManualName() ? $article->getParentArticle()->getManualName() : $article->getParentArticle()->getName()); ?>
                         <?php else: ?>
                             <?php echo __('No parent article'); ?>
                         <?php endif; ?>
@@ -86,7 +86,7 @@
     <?php
         if ($article->getArticleType() == \thebuggenie\modules\publish\entities\Article::TYPE_MANUAL)
         {
-            echo $article->getManualName();
+            echo get_spaced_name($article->getManualName());
         }
         else
         {

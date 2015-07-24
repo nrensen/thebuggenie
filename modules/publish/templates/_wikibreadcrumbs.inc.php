@@ -23,12 +23,12 @@
         }
         elseif (!\thebuggenie\core\framework\Context::isProjectContext() && mb_strtolower($bcpath) != 'mainpage')
         {
-            $tbg_response->addBreadcrumb($bcpath, make_url('publish_article', array('article_name' => $bcpath)));
+            $tbg_response->addBreadcrumb(get_spaced_name($bcpath), make_url('publish_article', array('article_name' => $bcpath)));
         }
         foreach ($items as $bc_name)
         {
             $bcpath .= ":".$bc_name;
-            $tbg_response->addBreadcrumb($bc_name, make_url('publish_article', array('article_name' => $bcpath)));
+            $tbg_response->addBreadcrumb(get_spaced_name($bc_name), make_url('publish_article', array('article_name' => $bcpath)));
         }
     }
     else
