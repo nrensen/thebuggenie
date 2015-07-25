@@ -511,12 +511,6 @@
             }
             Logging::log("URL is now '".htmlentities($url, ENT_COMPAT, 'utf-8')."'", 'routing');
 
-            // we remove the query string
-            if ($pos = mb_strpos($url, '?'))
-            {
-                $url = mb_substr($url, 0, $pos);
-            }
-
             $break = false;
 
             // we remove multiple /
@@ -863,7 +857,7 @@
             // in PHP 5.5, preg_replace with /e modifier is deprecated; preg_replace_callback is recommended
             $callback = function($matches) use($params)
             {
-                return (array_key_exists($matches[1], $params)) ? urlencode($params[$matches[1]]) : $matches[0];
+                return (array_key_exists($matches[1], $params)) ? rawurlencode($params[$matches[1]]) : $matches[0];
             };
 
             $real_url = preg_replace_callback('/\:([^\/]+)/', $callback, $url);
@@ -888,24 +882,24 @@
                                     {
                                         foreach ($vv as $vvk => $vvv)
                                         {
-                                            $tmp[] = "{$key}[{$k}][{$vk}][{$vvk}]".$equals.urlencode($vvv);
+                                            $tmp[] = "{$key}[{$k}][{$vk}][{$vvk}]".$equals.rawurlencode($vvv);
                                         }
                                     }
                                     else
                                     {
-                                        $tmp[] = "{$key}[{$k}][{$vk}]".$equals.urlencode($vv);
+                                        $tmp[] = "{$key}[{$k}][{$vk}]".$equals.rawurlencode($vv);
                                     }
                                 }
                             }
                             else
                             {
-                                $tmp[] = "{$key}[{$k}]".$equals.urlencode($v);
+                                $tmp[] = "{$key}[{$k}]".$equals.rawurlencode($v);
                             }
                         }
                     }
                     else
                     {
-                        $tmp[] = urlencode($key).$equals.urlencode($value);
+                        $tmp[] = rawurlencode($key).$equals.rawurlencode($value);
                     }
                 }
                 $tmp = implode($divider, $tmp);
