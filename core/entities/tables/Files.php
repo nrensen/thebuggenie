@@ -53,7 +53,7 @@
             }
             if ($content !== null)
             {
-                $crit->addInsert(self::CONTENT, $content);
+                $crit->addInsert(self::CONTENT, $content, 'blob');
             }
             $res = $this->doInsert($crit);
 
