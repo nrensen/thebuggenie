@@ -210,7 +210,7 @@ issue_upload:
     csrf_enabled: false
 
 article_upload:
-    route: /upload/to/article/:article_name
+    route: /upload/to/article/:article_id
     module: main
     action: upload
     parameters:
@@ -242,7 +242,7 @@ issue_upload_status:
     csrf_enabled: false
 
 article_upload_status:
-    route: /upload/get/status/for/article/:article_name
+    route: /upload/get/status/for/article/:article_id
     module: main
     action: getUploadStatus
     parameters:
@@ -258,7 +258,7 @@ issue_detach_file:
     csrf_enabled: false
 
 article_detach_file:
-    route: /upload/detach/file/:file_id/from/article/:article_name
+    route: /upload/detach/file/:file_id/from/article/:article_id
     module: main
     action: detachFile
     parameters:

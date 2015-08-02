@@ -215,6 +215,11 @@
             return array($resultcount, $articles);
         }
 
+        public static function getByID($id)
+        {
+            return tables\Articles::getTable()->getById($id);
+        }
+
         public static function getByName($article_name)
         {
             return tables\Articles::getTable()->getArticleByName($article_name);

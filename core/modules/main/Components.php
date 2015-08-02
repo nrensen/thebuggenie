@@ -303,7 +303,7 @@
                     $this->issue = entities\Issue::getB2DBTable()->selectById($this->issue_id);
                     break;
                 case 'article':
-                    $this->article = \thebuggenie\modules\publish\entities\Article::getByName($this->article_name);
+                    $this->article = \thebuggenie\modules\publish\entities\Article::getByID($this->article_id);
                     break;
                 default:
                     // @todo: dispatch a framework\Event that allows us to retrieve the
@@ -341,8 +341,8 @@
                     $this->existing_files = array_reverse($this->issue->getFiles());
                     break;
                 case 'article':
-                    $this->form_action = make_url('article_upload', array('article_name' => $this->article->getName()));
-                    $this->poller_url = make_url('article_upload_status', array('article_name' => $this->article->getName()));
+                    $this->form_action = make_url('article_upload', array('article_id' => $this->article->getID()));
+                    $this->poller_url = make_url('article_upload_status', array('article_id' => $this->article->getID()));
                     $this->existing_files = array_reverse($this->article->getFiles());
                     break;
                 default:
@@ -360,7 +360,7 @@
             }
             elseif ($this->mode == 'article' && !isset($this->article))
             {
-                $this->article = \thebuggenie\modules\publish\entities\Article::getByName($this->article_name);
+                $this->article = \thebuggenie\modules\publish\entities\Article::getByID($this->article_id);
             }
             $this->file_id = $this->file->getID();
         }

@@ -2990,9 +2990,9 @@ class Main extends framework\Action
         elseif (array_key_exists('file_id', $status) && $request['mode'] == 'article')
         {
             $file = tables\Files::getTable()->selectById($status['file_id']);
-            $status['content_uploader'] = $this->getComponentHTML('main/attachedfile', array('base_id' => 'article_' . mb_strtolower($request['article_name']) . '_files', 'mode' => 'article', 'article_name' => $request['article_name'], 'file' => $file));
-            $status['content_inline'] = $this->getComponentHTML('main/attachedfile', array('base_id' => 'article_' . mb_strtolower($request['article_name']) . '_files', 'mode' => 'article', 'article_name' => $request['article_name'], 'file' => $file));
-            $article = \thebuggenie\modules\publish\entities\Article::getByName($request['article_name']);
+            $status['content_uploader'] = $this->getComponentHTML('main/attachedfile', array('base_id' => 'article_' . $request['article_id'] . '_files', 'mode' => 'article', 'article_id' => $request['article_id'], 'file' => $file));
+            $status['content_inline'] = $this->getComponentHTML('main/attachedfile', array('base_id' => 'article_' . $request['article_id'] . '_files', 'mode' => 'article', 'article_id' => $request['article_id'], 'file' => $file));
+            $article = \thebuggenie\modules\publish\entities\Article::getByID($request['article_id']);
             $status['attachmentcount'] = count($article->getFiles());
         }
 
@@ -3014,8 +3014,8 @@ class Main extends framework\Action
                 $target = \thebuggenie\modules\publish\entities\tables\Articles::getTable()->selectById($request['target_id']);
                 $container_id = 'article_' . $target->getID() . '_files';
                 $base_id = $container_id;
-                $target_identifier = 'article_name';
-                $target_id = $request['article_name'];
+                $target_identifier = 'article_id';
+                $target_id = $request['article_id'];
                 break;
         }
         $saved_file_ids = $request['files'];
@@ -3122,7 +3122,7 @@ class Main extends framework\Action
         }
         elseif ($request['mode'] == 'article')
         {
-            $article = \thebuggenie\modules\publish\entities\Article::getByName($request['article_name']);
+            $article = \thebuggenie\modules\publish\entities\Article::getByID($request['article_id']);
             $canupload = (bool) ($article instanceof \thebuggenie\modules\publish\entities\Article && $article->canEdit());
         }
         else
@@ -3184,7 +3184,7 @@ class Main extends framework\Action
                     if (!$article instanceof \thebuggenie\modules\publish\entities\Article)
                         break;
 
-                    $this->forward($this->getRouting()->generate('publish_article_attachments', array('article_name' => $article->getName())));
+                    $this->forward($this->getRouting()->generate('publish_article_attachments', array('article_id' => $article->getID())));
                     break;
             }
         }
@@ -3210,7 +3210,7 @@ class Main extends framework\Action
                     $this->getResponse()->setHttpStatus(400);
                     return $this->renderJSON(array('error' => framework\Context::getI18n()->__('You can not remove items from this issue')));
                 case 'article':
-                    $article = \thebuggenie\modules\publish\entities\Article::getByName($request['article_name']);
+                    $article = \thebuggenie\modules\publish\entities\Article::getByID($request['article_id']);
                     if ($article instanceof \thebuggenie\modules\publish\entities\Article && $article->canEdit() && (int) $request->getParameter('file_id', 0))
                     {
                         $article->detachFile($file);
