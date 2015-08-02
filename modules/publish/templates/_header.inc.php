@@ -43,7 +43,7 @@
                         <?php if ($article->getID()): ?>
                             <li<?php if ($mode == 'history'): ?> class="selected"<?php endif; ?>><?php echo link_tag(make_url('publish_article_history', array('article_name' => $article_name)), __('History')); ?></li>
                             <?php if (in_array($mode, array('show', 'edit')) && \thebuggenie\core\framework\Settings::isUploadsEnabled() && $article->canEdit()): ?>
-                                <li><a href="javascript:void(0);" onclick="TBG.Main.showUploader('<?php echo make_url('get_partial_for_backdrop', array('key' => 'uploader', 'mode' => 'article', 'article_name' => $article->getName())); ?>');"><?php echo __('Attach a file'); ?></a></li>
+                                <li><a href="javascript:void(0);" onclick="TBG.Main.showUploader('<?php echo make_url('get_partial_for_backdrop', array('key' => 'uploader', 'mode' => 'article', 'article_id' => $article->getID())); ?>');"><?php echo __('Attach a file'); ?></a></li>
                             <?php endif; ?>
                             <?php if (isset($article) && $article->canEdit()): ?>
                                 <li<?php if ($mode == 'permissions'): ?> class="selected"<?php endif; ?>><?php echo link_tag(make_url('publish_article_permissions', array('article_name' => $article_name)), __('Permissions')); ?></li>

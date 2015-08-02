@@ -62,7 +62,7 @@
                     <h4>
                         <?php echo __('Article attachments'); ?>
                         <?php if (\thebuggenie\core\framework\Settings::isUploadsEnabled() && $article->canEdit()): ?>
-                            <button class="button button-silver" onclick="TBG.Main.showUploader('<?php echo make_url('get_partial_for_backdrop', array('key' => 'uploader', 'mode' => 'article', 'article_name' => $article_name)); ?>');"><?php echo __('Attach a file'); ?></button>
+                            <button class="button button-silver" onclick="TBG.Main.showUploader('<?php echo make_url('get_partial_for_backdrop', array('key' => 'uploader', 'mode' => 'article', 'article_id' => $article->getID())); ?>');"><?php echo __('Attach a file'); ?></button>
                         <?php else: ?>
                             <button class="button button-silver disabled" onclick="TBG.Main.Helpers.Message.error('<?php echo __('File uploads are not enabled'); ?>');"><?php echo __('Attach a file'); ?></button>
                         <?php endif; ?>
