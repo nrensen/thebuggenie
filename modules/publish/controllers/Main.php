@@ -326,8 +326,16 @@
                 $this->forward(framework\Context::getRouting()->generate('publish_article', array('article_name' => $this->article_name)));
             }
 
-            $this->article_route = ($this->article->getID()) ? 'publish_article_edit' : 'publish_article_new';
-            $this->article_route_params = ($this->article->getID()) ? array('article_name' => $this->article_name) : array();
+            if ($this->article->getID()) {
+                $this->article_route = 'publish_article_edit';
+                $this->article_route_params = array('article_name' => $request->getRawParameter('article_name'));
+            } elseif ($request->hasParameter('parent_article_name')) {
+                $this->article_route = 'publish_article_new_parent';
+                $this->article_route_params = array('parent_article_name' => $request->getRawParameter('parent_article_name'));
+            } else {
+                $this->article_route = 'publish_article_new';
+                $this->article_route_params = array();
+            }
 
             if ($request->isPost())
             {

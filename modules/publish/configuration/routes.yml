@@ -7,7 +7,14 @@ publish:
     csrf_enabled: false
 
 publish_article_new:
-    route: '/wiki/new/*'
+    route: '/wiki/new'
+    module: publish
+    action: editArticle
+    parameters: [ ]
+    csrf_enabled: false
+
+publish_article_new_parent:
+    route: '/wiki/new/:parent_article_name'
     module: publish
     action: editArticle
     parameters: [ ]

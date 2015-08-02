@@ -48,9 +48,9 @@
                             <?php if (isset($article) && $article->canEdit()): ?>
                                 <li<?php if ($mode == 'permissions'): ?> class="selected"<?php endif; ?>><?php echo link_tag(make_url('publish_article_permissions', array('article_name' => $article_name)), __('Permissions')); ?></li>
                                 <li class="separator"></li>
-                                <li><?php echo link_tag(make_url('publish_article_new', array('parent_article_name' => $article_name)), __('Create new article here')); ?></li>
+                                <li><?php echo link_tag(make_url('publish_article_new_parent', array('parent_article_name' => $article_name)), __('Create new article here')); ?></li>
                                 <?php if (\thebuggenie\core\framework\Context::isProjectContext()): ?>
-                                    <li><?php echo link_tag(make_url('publish_article_new', array('parent_article_name' => \thebuggenie\core\framework\Context::getCurrentProject()->getName().':')), __('Create new article')); ?></li>
+                                    <li><?php echo link_tag(make_url('publish_article_new_parent', array('parent_article_name' => \thebuggenie\core\framework\Context::getCurrentProject()->getName().':')), __('Create new article')); ?></li>
                                 <?php else: ?>
                                     <li><?php echo link_tag(make_url('publish_article_new'), __('Create new article')); ?></li>
                                 <?php endif; ?>
