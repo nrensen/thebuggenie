@@ -4218,7 +4218,7 @@ define(['prototype', 'effects', 'controls', 'scriptaculous', 'jquery', 'jquery-u
                         });
                     }
                 },
-                success: {update: field + '_wrapper'}
+                success: {replace: field}
             });
         };
 
