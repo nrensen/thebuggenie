@@ -15,44 +15,52 @@
         <?php if ($article instanceof \thebuggenie\modules\publish\entities\Article): ?>
             <?php if (\thebuggenie\core\framework\Context::getModule('publish')->canUserEditArticle($article_name)): ?>
                 <ul class="simple_list">
-                <?php foreach ($namespaces as $namespace): ?>
-                    <li class="rounded_box <?php if (!(is_numeric($namespace) && $namespace == 0) && $namespace == $article->getName()): ?>verylightyellow<?php else: ?>invisible borderless<?php endif; ?>" style="padding: 10px;">
+                <?php for ($i = 0; $i < count($namespaces); $i++):
+                    $namespace = $namespaces[$i];
+                    $cssclass = 'invisible borderless';
+                    if (is_numeric($namespace) && $namespace == 0)
+                    {
+                        $title = __('Permissions for entire wiki');
+                        $help = __('These are the default permissions for all wiki articles. They will apply unless overridden by article-specific or namespace permissions.');
+                    }
+                    elseif ($namespace == $article->getName())
+                    {
+                        $title = __('Permissions for the article %article_name', array('%article_name' => '<span class="namespace">'.get_spaced_name($namespace).'</span>'));
+                        $help = __('These permissions override any other permissions for this article. They will also apply to child-articles unless overridden by child-namespace or child-article permissions.');
+                        $cssclass = 'verylightyellow';
+                    }
+                    elseif ($namespace == "Category")
+                    {
+                        $title = __('Permissions to edit categories');
+                        $help = __('These permissions determine who can create and edit categories.');
+                    }
+                    else
+                    {
+                        $title = __('Permissions for the %namespace namespace', array('%namespace' => '<span class="namespace">'.get_spaced_name($namespace).'</span>'));
+                        $help = __('These permissions apply to the the %namespace namespace. They will also apply to all child-articles of this namespace unless overridden by article-specific or child-namespace permissions.', array('%namespace' => '<i>'.get_spaced_name($namespace).'</i>'));
+                    }
+                ?>
+                    <li class="rounded_box <?php echo $cssclass; ?>" style="padding: 10px;">
                         <div class="namespace_header">
-                            <?php if (is_numeric($namespace) && $namespace == 0): ?>
-                                <?php echo __('Specify permissions for entire wiki'); ?>
-                            <?php elseif ($namespace == $article->getName()): ?>
-                                <?php echo __('Specify permissions for the article %article_name', array('%article_name' => '<span class="namespace">'.get_spaced_name($namespace).'</span>')); ?>
-                            <?php elseif ($namespace == "Category"): ?>
-                                <?php echo __('Specify permissions to edit categories'); ?>
-                            <?php else: ?>
-                                <?php echo __('Specify permissions for the %namespace namespace', array('%namespace' => '<span class="namespace">'.get_spaced_name($namespace).'</span>')); ?>
-                            <?php endif; ?>
+                            <?php echo $title; ?>
                         </div>
-                        <?php if (is_numeric($namespace) && $namespace == 0): ?>
-                            <?php echo __('Select this option to specify permissions for the entire wiki.'); ?>
-                        <?php elseif ($namespace == $article->getName()): ?>
-                            <?php echo __('Select this option to specify permissions for this article.'); ?>
-                        <?php elseif ($namespace == "Category"): ?>
-                            <?php echo __('Select this option to specify permissions for who can create and edit categories.'); ?>
-                        <?php else: ?>
-                            <?php echo __('Specify permissions for the %namespace namespace. These permissions will apply for all articles in the mentioned namespace for which article-specific permissions, or child-namespace permissions have not been granted.', array('%namespace' => '<i>'.get_spaced_name($namespace).'</i>')); ?>
-                        <?php endif; ?>
+                        <?php echo $help; ?>
                         <div style="text-align: right; padding: 10px;">
-                            <button onclick="$('publish_<?php echo $namespace; ?>_readarticle_permissions').toggle();"><?php echo __('Edit read permissions'); ?></button>
-                            <button onclick="$('publish_<?php echo $namespace; ?>_editarticle_permissions').toggle();"><?php echo __('Edit write permissions'); ?></button>
-                            <button onclick="$('publish_<?php echo $namespace; ?>_deletearticle_permissions').toggle();"><?php echo __('Edit delete permissions'); ?></button>
+                            <button onclick="$('publish_<?php echo $i; ?>_readarticle_permissions').toggle();"><?php echo __('Edit read permissions'); ?></button>
+                            <button onclick="$('publish_<?php echo $i; ?>_editarticle_permissions').toggle();"><?php echo __('Edit write permissions'); ?></button>
+                            <button onclick="$('publish_<?php echo $i; ?>_deletearticle_permissions').toggle();"><?php echo __('Edit delete permissions'); ?></button>
                         </div>
-                        <div id="publish_<?php echo $namespace; ?>_readarticle_permissions" style="padding: 10px; display: none;">
+                        <div id="publish_<?php echo $i; ?>_readarticle_permissions" style="padding: 10px; display: none;">
                             <?php include_component('configuration/permissionsinfo', array('key' => \thebuggenie\modules\publish\Publish::PERMISSION_READ_ARTICLE, 'mode' => 'module_permissions', 'target_id' => $namespace, 'module' => 'publish', 'access_level' => \thebuggenie\core\framework\Settings::ACCESS_FULL)); ?>
                         </div>
-                        <div id="publish_<?php echo $namespace; ?>_editarticle_permissions" style="padding: 10px; display: none;">
+                        <div id="publish_<?php echo $i; ?>_editarticle_permissions" style="padding: 10px; display: none;">
                             <?php include_component('configuration/permissionsinfo', array('key' => \thebuggenie\modules\publish\Publish::PERMISSION_EDIT_ARTICLE, 'mode' => 'module_permissions', 'target_id' => $namespace, 'module' => 'publish', 'access_level' => \thebuggenie\core\framework\Settings::ACCESS_FULL)); ?>
                         </div>
-                        <div id="publish_<?php echo $namespace; ?>_deletearticle_permissions" style="padding: 10px; display: none;">
+                        <div id="publish_<?php echo $i; ?>_deletearticle_permissions" style="padding: 10px; display: none;">
                             <?php include_component('configuration/permissionsinfo', array('key' => \thebuggenie\modules\publish\Publish::PERMISSION_DELETE_ARTICLE, 'mode' => 'module_permissions', 'target_id' => $namespace, 'module' => 'publish', 'access_level' => \thebuggenie\core\framework\Settings::ACCESS_FULL)); ?>
                         </div>
                     </li>
-                <?php endforeach; ?>
+                <?php endfor; ?>
                 </ul>
             <?php else: ?>
                 <div class="redbox" style="margin: 0 5px 5px 5px; font-size: 14px;">

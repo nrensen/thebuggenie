@@ -1,8 +1,11 @@
-<?php if (! isset($in_json)): ?>
-<div id="permissions_<?php echo $key; ?>_<?php echo $target_id; ?>_<?php echo $type; ?>_<?php echo $item_id; ?>_wrapper">
-<?php endif; ?>
-    <?php echo image_tag('spinning_16.gif', array('id' => 'permissions_' . $key . '_' . $target_id . '_' . $type . '_' . $item_id . '_indicator', 'style' => 'display: none;margin-right: 0;')); ?>
-    <span style="float:right;" id="permissions_<?php echo $key; ?>_<?php echo $target_id; ?>_<?php echo $type; ?>_<?php echo $item_id; ?>">
+<?php
+    $tag_id = 'permissions_' . $key . '_' . $target_id . '_' . $type . '_' . $item_id;
+    $html_tag_id = htmlentities($tag_id);
+    $json_tag_id = htmlentities(json_encode(utf8_encode($tag_id)));
+?>
+<div id="<?php echo $html_tag_id; ?>">
+    <?php echo image_tag('spinning_16.gif', array('id' => $html_tag_id . '_indicator', 'style' => 'display: none;margin-right: 0;')); ?>
+    <span style="float:right">
         <?php $val = \thebuggenie\core\framework\Context::isPermissionSet($type, $key, $item_id, $target_id, $module, true); ?>
         <?php if (is_bool($val)): ?>
             <?php $image_tag = ($val) ? image_tag('permission_set_ok.png') : image_tag('permission_set_denied.png'); ?>
@@ -21,11 +24,11 @@
         <?php endif; ?>
         <?php if ($access_level == \thebuggenie\core\framework\Settings::ACCESS_FULL): ?>
             <?php if (is_null($val)): ?>
-                <a href="javascript:void(0);" onclick="TBG.Config.Permissions.set('<?php echo make_url('permissions_set_allowed', array('key' => $key, 'target_id' => $target_id, 'target_type' => $type, 'item_id' => $item_id, 'target_module' => $module, 'template_mode' => $mode)); ?>', 'permissions_<?php echo $key; ?>_<?php echo $target_id; ?>_<?php echo $type; ?>_<?php echo $item_id; ?>');" class="image" title="<?php echo __('Click to grant access'); ?>"><?php echo $image_tag; ?></a>
+                <a href="javascript:void(0);" onclick="TBG.Config.Permissions.set('<?php echo make_url('permissions_set_allowed', array('key' => $key, 'target_id' => $target_id, 'target_type' => $type, 'item_id' => $item_id, 'target_module' => $module, 'template_mode' => $mode)); ?>', <?php echo $json_tag_id; ?>);" class="image" title="<?php echo __('Click to grant access'); ?>"><?php echo $image_tag; ?></a>
             <?php elseif ($val): ?>
-                <a href="javascript:void(0);" onclick="TBG.Config.Permissions.set('<?php echo make_url('permissions_set_denied', array('key' => $key, 'target_id' => $target_id, 'target_type' => $type, 'item_id' => $item_id, 'target_module' => $module, 'template_mode' => $mode)); ?>', 'permissions_<?php echo $key; ?>_<?php echo $target_id; ?>_<?php echo $type; ?>_<?php echo $item_id; ?>');" class="image" title="<?php echo ($mode == 'configuration') ? __('Click to explicitly deny access') : __('Click to remove access'); ?>"><?php echo $image_tag; ?></a>
+                <a href="javascript:void(0);" onclick="TBG.Config.Permissions.set('<?php echo make_url('permissions_set_denied', array('key' => $key, 'target_id' => $target_id, 'target_type' => $type, 'item_id' => $item_id, 'target_module' => $module, 'template_mode' => $mode)); ?>', <?php echo $json_tag_id; ?>);" class="image" title="<?php echo ($mode == 'configuration') ? __('Click to explicitly deny access') : __('Click to remove access'); ?>"><?php echo $image_tag; ?></a>
             <?php elseif (!$val): ?>
-                <a href="javascript:void(0);" onclick="TBG.Config.Permissions.set('<?php echo make_url('permissions_set_unset', array('key' => $key, 'target_id' => $target_id, 'target_type' => $type, 'item_id' => $item_id, 'target_module' => $module, 'template_mode' => $mode)); ?>', 'permissions_<?php echo $key; ?>_<?php echo $target_id; ?>_<?php echo $type; ?>_<?php echo $item_id; ?>');" class="image" title="<?php echo __('Click to clear access setting'); ?>"><?php echo $image_tag; ?></a>
+                <a href="javascript:void(0);" onclick="TBG.Config.Permissions.set('<?php echo make_url('permissions_set_unset', array('key' => $key, 'target_id' => $target_id, 'target_type' => $type, 'item_id' => $item_id, 'target_module' => $module, 'template_mode' => $mode)); ?>', <?php echo $json_tag_id; ?>);" class="image" title="<?php echo __('Click to clear access setting'); ?>"><?php echo $image_tag; ?></a>
             <?php endif; ?>
         <?php else: ?>
             <?php echo $image_tag; ?>
@@ -62,6 +65,4 @@
             <?php endif; ?>
         </span>
     <?php endif; ?>
-<?php if (! isset($in_json)): ?>
 </div>
-<?php endif; ?>

@@ -4523,7 +4523,7 @@ define(['prototype', 'effects', 'controls', 'scriptaculous', 'jquery', 'TweenMax
                         });
                     }
                 },
-                success: {update: field + '_wrapper'}
+                success: {replace: field}
             });
         };
 
