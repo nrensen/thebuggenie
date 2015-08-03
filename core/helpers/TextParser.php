@@ -621,7 +621,7 @@
 
             if (framework\Context::isCLI()) return $href;
 
-            return link_tag($href, $title, $href_options);
+            return link_tag($href, framework\Context::getI18n()->__e($title), $href_options);
         }
 
         protected function _parse_externallink($matches)
