@@ -352,7 +352,12 @@
                     if ($this->article->getArticleType() == Article::TYPE_MANUAL && !$this->article->getName())
                     {
                         $article_name_prefix = ($this->article->getParentArticle() instanceof Article) ? $this->article->getParentArticle()->getName() . ':' : $request->getRawParameter('parent_article_name');
-                        $this->article->setName(str_replace(' ', '', $article_name_prefix . $this->article->getManualName()));
+                        $article_name = $article_name_prefix . $this->article->getManualName();
+                        if (framework\Context::getModule('publish')->getSetting('allow_camelcase_links'))
+                        {
+                            $article_name = str_replace(' ', '', $article_name);
+                        }
+                        $this->article->setName($article_name);
                     }
                     $this->article->setContentSyntax($request['article_content_syntax']);
                     $this->article->setContent($request->getRawParameter('article_content'));
