@@ -54,11 +54,11 @@
         public function preExecute(framework\Request $request, $action)
         {
             $this->article = null;
-            $this->article_name = ($request->hasParameter('new_article_name')) ? $request['new_article_name'] : $request['article_name'];
+            $this->article_name = $request->getRawParameter($request->hasParameter('new_article_name') ? 'new_article_name' : 'article_name');
             $this->article_id = (int) $request['article_id'];
             $this->special = false;
 
-            if ($this->article_name && mb_strpos($request['article_name'], ':') !== false)
+            if (!is_null($this->article_name) && mb_strpos($this->article_name, ':') !== false)
             {
                 $this->article_name = $this->_getArticleNameDetails($this->article_name);
             }
@@ -101,8 +101,9 @@
                     }
                     elseif ($request->hasParameter('parent_article_name'))
                     {
-                        $this->article->setParentArticle(Articles::getTable()->getArticleByName($request['parent_article_name']));
-                        $this->_getArticleNameDetails($request['parent_article_name']);
+                        $parent_article_name = $request->getRawParameter('parent_article_name');
+                        $this->article->setParentArticle(Articles::getTable()->getArticleByName($parent_article_name));
+                        $this->_getArticleNameDetails($parent_article_name);
                         if ($this->article->getParentArticle() instanceof Article)
                         {
                             if ($this->article->getParentArticle()->getArticleType() == Article::TYPE_WIKI)
@@ -277,13 +278,14 @@
                 {
                     throw new \Exception($this->getI18n()->__('You do not have permission to delete this article'));
                 }
-                if (!$request['article_name'])
+                $article_name = $request->getRawParameter('article_name');
+                if (is_null($article_name) || $article_name === '')
                 {
                     throw new \Exception($this->getI18n()->__('Please specify an article name'));
                 }
                 else
                 {
-                    Article::deleteByName($request['article_name']);
+                    Article::deleteByName($article_name);
                 }
             }
             catch (\Exception $e)
@@ -347,12 +349,12 @@
                     $article_prev_name = $this->article->getName();
                     $article_prev_manual_name = $this->article->getManualName();
                     $this->article->setArticleType($request['article_type']);
-                    $this->article->setName($request['new_article_name']);
-                    $this->article->setParentArticle(Articles::getTable()->getArticleByName($request['parent_article_name']));
-                    $this->article->setManualName($request['manual_name']);
+                    $this->article->setName($request->getRawParameter('new_article_name'));
+                    $this->article->setParentArticle(Articles::getTable()->getArticleByName($request->getRawParameter('parent_article_name')));
+                    $this->article->setManualName($request->getRawParameter('manual_name'));
                     if ($this->article->getArticleType() == Article::TYPE_MANUAL && !$this->article->getName())
                     {
-                        $article_name_prefix = ($this->article->getParentArticle() instanceof Article) ? $this->article->getParentArticle()->getName() . ':' : $request['parent_article_name'];
+                        $article_name_prefix = ($this->article->getParentArticle() instanceof Article) ? $this->article->getParentArticle()->getName() . ':' : $request->getRawParameter('parent_article_name');
                         $this->article->setName($article_name_prefix . $this->article->getManualName());
                     }
                     if ($this->article->getArticleType() == Article::TYPE_MANUAL && !$this->article->getParentArticle() instanceof Article && $article_prev_manual_name == $article_prev_name && $article_prev_manual_name != $this->article->getManualName())
@@ -374,7 +376,7 @@
                     if ($this->article->getLastUpdatedDate() != $request['last_modified'])
                         throw new \Exception(framework\Context::getI18n()->__('The file has been modified since you last opened it'));
 
-                    if (($article = Article::getByName($request['new_new_article_name'])) && $article instanceof Article && $article->getID() != $request['article_id'])
+                    if (($article = Article::getByName($request->getRawParameter('new_new_article_name'))) && $article instanceof Article && $article->getID() != $request['article_id'])
                         throw new \Exception(framework\Context::getI18n()->__('An article with that name already exists. Please choose a different article name'));
 
                     if (!$this->preview)
@@ -393,7 +395,7 @@
 
         public function runFindArticles(framework\Request $request)
         {
-            $this->articlename = $request['articlename'];
+            $this->articlename = $request->getRawParameter('articlename');
 
             if ($this->articlename)
             {
