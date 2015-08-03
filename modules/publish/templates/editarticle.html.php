@@ -61,7 +61,7 @@
                             <?php /*<tr>
                                 <td style="padding: 5px;"><label for="manual_name"><?php echo __('Manual entry name'); ?></label></td>
                                 <td>
-                                    <input type="text" name="manual_name" id="manual_name" value="<?php echo $article->getManualName(); ?>" style="width: 400px;"><br>
+                                    <input type="text" name="manual_name" id="manual_name" value="<?php echo \thebuggenie\core\framework\Context::getI18n()->__e($article->getManualName()); ?>" style="width: 400px;"><br>
                                 </td>
                             </tr> */ ?>
                         </tbody>

@@ -128,7 +128,7 @@
 
         public function componentSpecialWhatLinksHere()
         {
-            $this->linked_article_name = framework\Context::getRequest()->getParameter('linked_article_name');
+            $this->linked_article_name = framework\Context::getRequest()->getRawParameter('linked_article_name');
             $this->articles = Articles::getTable()->getAllByLinksToArticleName($this->linked_article_name);
         }
 
