@@ -865,7 +865,8 @@
          */
         public function setName($name)
         {
-            $this->_name = preg_replace('/[^\p{L}\p{N} :]/u', '', $name);
+            # XXX This should fail rather than silently adjust the name
+            $this->_name = preg_replace('/[\\/\\[\\]|]/', '', $name);
         }
 
         /**
