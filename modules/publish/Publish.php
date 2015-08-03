@@ -250,7 +250,11 @@
 
         public function getSpacedName($camelcased)
         {
-            return preg_replace('/(?<=[a-z])(?=[A-Z])/', ' ', $camelcased);
+            if ($this->getSetting('allow_camelcase_links'))
+            {
+                $camelcased = preg_replace('/(?<=[a-z])(?=[A-Z])/', ' ', $camelcased);
+            }
+            return framework\Context::getI18n()->__e($camelcased);
         }
 
         public function stripExclamationMark($matches, $parser)

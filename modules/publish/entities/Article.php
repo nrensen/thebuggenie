@@ -458,7 +458,7 @@
 
         public function getSpacedName()
         {
-            return preg_replace('/(?<=[a-z])(?=[A-Z])/', ' ', $this->getName());
+            return framework\Context::getModule('publish')->getSpacedName($this->getName());
         }
 
         public function getCategoryName()
