@@ -381,7 +381,7 @@
                     $title .= $matches[7];
                 }
             }
-            $namespace = $matches[3];
+            $namespace = html_entity_decode($matches[3], ENT_QUOTES, 'UTF-8');
 
             if (mb_strtolower($namespace) == 'category')
             {
