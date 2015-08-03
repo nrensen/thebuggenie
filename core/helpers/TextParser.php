@@ -593,7 +593,6 @@
                 return link_tag($href, $title); // $this->parse_image($href,$title,$options);
             }
 
-            $title = preg_replace('/\(.*?\)/', '', $title);
             $title = preg_replace('/^.*?\:/', '', $title);
 
             if (!$namespace || !array_key_exists($namespace, array('ftp', 'http', 'https', 'gopher', 'mailto', 'news', 'nntp', 'telnet', 'wais', 'file', 'prospero', 'aim', 'webcal')))
