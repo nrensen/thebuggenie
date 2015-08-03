@@ -330,7 +330,11 @@
 
         protected function _wiki_link($topic)
         {
-            return ucfirst(str_replace(' ', '_', $topic));
+            if (\thebuggenie\core\framework\Settings::get('allow_camelcase_links', 'publish'))
+            {
+                $topic = ucfirst(str_replace(' ', '_', $topic));
+            }
+            return $topic;
         }
 
         protected function _parse_image($href,$title,$options)
@@ -605,6 +609,7 @@
             }
             else
             {
+                #XXX Why would we want ucfirst for ftp, http, ...?
                 $href = $namespace.':'.$this->_wiki_link($href);
             }
 
