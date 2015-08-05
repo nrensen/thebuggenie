@@ -902,19 +902,21 @@
                         break;
                 }
 
+                $target_id = $request->getRawParameter('target_id');
+
                 switch ($request['mode'])
                 {
                     case 'allowed':
-                        framework\Context::setPermission($request['key'], $request['target_id'], $request['target_module'], $uid, $gid, $tid, true);
+                        framework\Context::setPermission($request['key'], $target_id, $request['target_module'], $uid, $gid, $tid, true);
                         break;
                     case 'denied':
-                        framework\Context::setPermission($request['key'], $request['target_id'], $request['target_module'], $uid, $gid, $tid, false);
+                        framework\Context::setPermission($request['key'], $target_id, $request['target_module'], $uid, $gid, $tid, false);
                         break;
                     case 'unset':
-                        framework\Context::removePermission($request['key'], $request['target_id'], $request['target_module'], $uid, $gid, $tid, true, null, 0);
+                        framework\Context::removePermission($request['key'], $target_id, $request['target_module'], $uid, $gid, $tid, true, null, 0);
                         break;
                 }
-                return $this->renderJSON(array('content' => $this->getComponentHTML('configuration/permissionsinfoitem', array('key' => $request['key'], 'target_id' => $request['target_id'], 'type' => $request['target_type'], 'mode' => $request['template_mode'], 'item_id' => $request['item_id'], 'module' => $request['target_module'], 'access_level' => $this->access_level, 'in_json' => 1))));
+                return $this->renderJSON(array('content' => $this->getComponentHTML('configuration/permissionsinfoitem', array('key' => $request['key'], 'target_id' => $target_id, 'type' => $request['target_type'], 'mode' => $request['template_mode'], 'item_id' => $request['item_id'], 'module' => $request['target_module'], 'access_level' => $this->access_level))));
             }
             $this->getResponse()->setHttpStatus(400);
             return $this->renderJSON(array("error" => $i18n->__("You don't have access to modify permissions")));
