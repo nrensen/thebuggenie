@@ -50,7 +50,7 @@
                                 <li class="separator"></li>
                                 <li><?= link_tag(make_url('publish_article_new_parent', array('parent_article_name' => $article_name)), fa_image_tag('plus') . __('Create new article here')); ?></li>
                                 <?php if (\thebuggenie\core\framework\Context::isProjectContext()): ?>
-                                    <li><?= link_tag(make_url('publish_article_new_parent', array('parent_article_name' => \thebuggenie\core\framework\Context::getCurrentProject()->getName().':')), fa_image_tag('plus') . __('Create new article')); ?></li>
+                                    <li><?= link_tag(make_url('publish_article_new_parent', array('parent_article_name' => \thebuggenie\core\framework\Context::getCurrentProject()->getKey().':')), fa_image_tag('plus') . __('Create new article')); ?></li>
                                 <?php else: ?>
                                     <li><?= link_tag(make_url('publish_article_new'), fa_image_tag('plus') . __('Create new article')); ?></li>
                                 <?php endif; ?>
