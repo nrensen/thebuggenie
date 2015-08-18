@@ -1775,7 +1775,7 @@ a.friend { color: #277CBA; }
 #issue_details_container.collapsed { width: 30px; }
 #issue_details_container.collapsed #issue_details { width: 20px; }
 #issue_details fieldset {
-    margin: 0 8px 15px 0;
+    margin: 0 8px 5px 0;
     border-color: rgba(0, 0, 0, 0.2);
 }
 #issue_details fieldset ul { margin-top: 0; padding-top: 0; }
@@ -1922,7 +1922,7 @@ ul.workflow_actions li:hover { box-shadow: 0 0 2px rgba(0, 0, 0, 0.2); -webkit-b
 /* end backdrop styling */
 
 /* main issue view styling */
-.viewissue_container { width: 100%; text-align: left; padding: 0 0 50px 0; margin: 0; line-height: 1.9; }
+.viewissue_container { width: 100%; text-align: left; padding: 0 0 50px 0; margin: 0; }
 #viewissue_changed > form > div > input, #viewissue_changed > form > div > button, #viewissue_saved > div > button { line-height: 21px !important; margin-top: -3px; padding: 0.5px 8px; }
 /* issue info boxes */
 #viewissue_menu li { box-shadow: 1px -1px 1px rgba(50, 50, 50, 0.2); -webkit-box-shadow: 1px -1px 1px rgba(50, 50, 50, 0.2); -moz-box-shadow: 1px -1px 1px rgba(50, 50, 50, 0.2); }
