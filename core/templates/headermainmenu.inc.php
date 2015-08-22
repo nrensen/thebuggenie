@@ -66,7 +66,7 @@
         <?php endif; ?>
         <?php if (($tbg_user->hasPageAccess('teamlist') || count($tbg_user->getTeams())) && !is_null(\thebuggenie\core\entities\Team::getAll())): ?>
             <li class="with-dropdown <?php if ($tbg_response->getPage() == 'team'): ?>selected<?php endif; ?>">
-                <?= link_tag('javascript:void(0)', fa_image_tag('users') . '<span>'.__('Teams').'</span>' . fa_image_tag('caret-down', ['class' => 'dropdown-indicator']), ['class' => 'dropper']); ?>
+                <?= link_tag(make_url('team_list'), fa_image_tag('users') . '<span>'.__('Teams').'</span>' . fa_image_tag('caret-down', ['class' => 'dropdown-indicator']), ['class' => 'dropper']); ?>
                 <ul id="team_menu" class="tab_menu_dropdown popup_box">
                     <?php foreach (\thebuggenie\core\entities\Team::getAll() as $team): ?>
                         <?php if (!$team->hasAccess()) continue; ?>

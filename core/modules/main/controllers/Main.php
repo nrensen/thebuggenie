@@ -756,6 +756,15 @@ class Main extends framework\Action
     }
 
     /**
+     * Client List
+     */
+    public function runClientList()
+    {
+        $this->forward403Unless(framework\Context::getUser()->hasPageAccess('clientlist'));
+        $this->clients = \thebuggenie\core\entities\Client::getAll();
+    }
+
+    /**
      * Client Dashboard
      *
      * @param \thebuggenie\core\framework\Request $request
@@ -779,6 +788,15 @@ class Main extends framework\Action
             framework\Logging::log($e->getMessage(), 'core', framework\Logging::LEVEL_WARNING);
             return $this->return404(framework\Context::getI18n()->__('This client does not exist'));
         }
+    }
+
+    /**
+     * Team List
+     */
+    public function runTeamList()
+    {
+        $this->forward403Unless(framework\Context::getUser()->hasPageAccess('teamlist'));
+        $this->teams = \thebuggenie\core\entities\Team::getAll();
     }
 
     /**

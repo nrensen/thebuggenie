@@ -4604,7 +4604,7 @@ input[type=submit].workflow_transition_submit_button, input[type=submit].workflo
     font-size: 0.9em;
 }
 
-/* project list, client/team dashboard and overview */
+/* project list, client/team list, dashboard and overview */
 ul.project_list {
     margin: 0 0 30px 0;
     text-align: left;
@@ -4645,8 +4645,29 @@ ul.project_list > li {
     font-weight: 500
 }
 
-.client_dashboard {
+.client_dashboard, team_dashboard {
     padding: 10px;
+}
+
+.client_list_header, .team_list_header {
+    font-size: 1.9em;
+    padding: 10px;
+}
+
+.client_list, .team_list {
+    margin-left: 20px;
+}
+
+.client_list .header, .team_list .header {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.client_list .info, .team_list .info {
+    font-weight: normal;
+    font-size: 0.8em;
+    color: #888;
+    margin-bottom: 10px;
 }
 
 .button.project-quick-edit {
