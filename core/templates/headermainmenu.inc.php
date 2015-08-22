@@ -76,7 +76,7 @@
         <?php if (!framework\Context::isProjectContext() && ($tbg_user->hasPageAccess('teamlist') || count($tbg_user->getTeams())) && !is_null(\thebuggenie\core\entities\tables\Teams::getTable()->getAll())): ?>
             <li<?php if ($tbg_response->getPage() == 'team'): ?> class="selected"<?php endif; ?>>
                 <div class="menuitem_container">
-                    <?php echo link_tag('javascript:void(0)', image_tag('tab_teams.png') . __('Teams'), array('class' => 'not_clickable')); ?>
+                    <?php echo link_tag(make_url('team_list'), image_tag('tab_teams.png') . __('Teams')); ?>
                     <?php echo javascript_link_tag(image_tag('tabmenu_dropdown.png', array('class' => 'menu_dropdown')), array('onmouseover' => "")); ?>
                 </div>
                 <div id="team_menu" class="tab_menu_dropdown">

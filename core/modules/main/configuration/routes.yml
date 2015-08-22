@@ -26,6 +26,13 @@ remove_link:
     parameters: [ ]
     csrf_enabled: false
 
+client_list:
+    route: /clients
+    module: main
+    action: clientlist
+    parameters: []
+    csrf_enabled: false
+
 client_dashboard:
     route: /clients/:client_id
     module: main
@@ -38,6 +45,13 @@ client_dashboard_specific:
     module: main
     action: clientdashboard
     parameters: [ ]
+    csrf_enabled: false
+
+team_list:
+    route: /teams
+    module: main
+    action: teamlist
+    parameters: []
     csrf_enabled: false
 
 team_dashboard:

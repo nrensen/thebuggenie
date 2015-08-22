@@ -1,6 +1,6 @@
 <?php
 
-    $tbg_response->addBreadcrumb(__('Clients'), null, tbg_get_breadcrumblinks('client_list'));
+    $tbg_response->addBreadcrumb(__('Clients'), make_url('client_list'), tbg_get_breadcrumblinks('client_list'));
     if ($client instanceof \thebuggenie\core\entities\Client)
     {
         $tbg_response->setTitle(__('Client dashboard for %client_name', array('%client_name' => $client->getName())));

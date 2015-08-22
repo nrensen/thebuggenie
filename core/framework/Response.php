@@ -664,8 +664,12 @@
                     $links[] = array('url' => Context::getRouting()->generate('home'), 'title' => $i18n->__('Frontpage'));
                     $links[] = array('url' => Context::getRouting()->generate('dashboard'), 'title' => $i18n->__('Personal dashboard'));
                     $links[] = array('title' => $i18n->__('Issues'));
-                    $links[] = array('title' => $i18n->__('Teams'));
-                    $links[] = array('title' => $i18n->__('Clients'));
+                    if (Context::getUser()->hasPageAccess('teamlist')) {
+                        $links[] = array('url' => make_url('team_list'), 'title' => $i18n->__('Teams'));
+                    }
+                    if (Context::getUser()->hasPageAccess('clientlist')) {
+                        $links[] = array('url' => make_url('client_list'), 'title' => $i18n->__('Clients'));
+                    }
                     $links = Event::createNew('core', 'breadcrumb_main_links', null, array(), $links)->trigger()->getReturnList();
 
                     if (Context::getUser()->canAccessConfigurationPage())

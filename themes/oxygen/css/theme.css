@@ -1546,19 +1546,21 @@ input[type=submit].workflow_transition_submit_button, input[type=submit].workflo
 .side_bar .header { margin: 2px 0 5px 0; padding: 3px 3px 3px 5px; font-weight: bold; border-bottom: 1px solid #CCC; background-color: transparent; }
 .side_bar .content { padding: 0 0 3px 0; font-size: 0.9em; }
 
-/* project list, client/team dashboard and overview */
+/* project list, client/team list, dashboard and overview */
 ul.project_list { margin-bottom: 30px; text-align: left; }
 .project_list .button-group.project-config-buttons .project-quick-edit, .project_list .button-group.project-config-buttons .project-quick-edit:hover, .project_list .button-group.project-config-buttons .project-settings, .project_list .button-group.project-config-buttons .project-settings:hover { font-size: 0.85em !important; padding: 0 3px !important; float: none; }
 ul.project_list > li { margin: 0px; font-size: 1.0em; font-weight: bold; padding: 5px 0 5px 0; clear: both; }
-.client_dashboard, .project_overview { clear: both; }
+.client_dashboard, .team_dashboard, .project_overview { clear: both; }
 .client_dashboard .header, .project_overview .header { padding: 5px 5px 5px 2px; margin-bottom: 8px; border-bottom: 1px dotted #DDD; font-size: 1.1em; text-transform: uppercase; font-weight: normal }
-.client_dashboard { padding: 10px; }
-.team_dashboard, .project_overview { clear: both; }
+.client_dashboard, .team_dashboard { padding: 10px; }
+.client_list_header, .team_list_header { font-size: 1.9em; padding: 10px; }
+.client_list, .team_list { margin-left: 20px; }
+.client_list .header, .team_list .header { font-weight: bold; font-size: 1.1em; }
+.client_list .info, .team_list .info { font-weight: normal; font-size: 0.8em; color: #888; margin-bottom: 10px; }
 .project_overview .button-group { float: right; }
 .project_overview .button-group .button { font-weight: normal; }
 .project_overview .button-group .button.lefthugging, .project_overview .button-group .button.lefthugging:hover { padding-left: 7px !important; font-size: 0.8em !important; }
 .project_overview .button-group .button.righthugging, .project_overview .button-group .button.righthugging:hover { padding-right: 4px !important; }
-.team_dashboard { padding: 10px; }
 .dashboard_client_info { margin-bottom: 10px; width: 100%; }
 .dashboard_client_info .dashboard_client_header { font-size: 1.9em; }
 .dashboard_client_info .dashboard_client_viewusers { float: right; }
