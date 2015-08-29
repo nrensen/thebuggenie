@@ -11,7 +11,7 @@
     <div class="project_information_block">
         <div class="project_information_container">
             <span class="project_name">
-                <?= link_tag(make_url('project_dashboard', array('project_key' => $project->getKey())), '<span class="project_name_span">'.$project->getName()."</span>"); ?><?php if ($project->usePrefix()) echo '<span class="project_prefix_span">'.mb_strtoupper($project->getPrefix()).'</span>'; ?>
+                <?= link_tag(make_url('project_dashboard', array('project_key' => $project->getKey())), '<span class="project_name_span">'.$project->getName()."</span>"); ?><?php if ($project->usePrefix()) echo '<span class="project_prefix_span">('.mb_strtoupper($project->getPrefix()).')</span>'; ?>
             </span>
             <div class="project_description">
                 <?= tbg_parse_text($project->getDescription()); ?>
