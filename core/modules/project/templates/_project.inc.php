@@ -46,7 +46,7 @@
     <table style="width: 100%; margin-top: 5px;" cellpadding=0 cellspacing=0>
         <?php foreach ($project->getVisibleIssuetypes() as $issuetype): ?>
             <tr>
-                <td style="padding-bottom: 2px; width: 200px; padding-right: 10px;"><b><?= $issuetype->getName(); ?>:</b></td>
+                <td style="padding-bottom: 2px; width: 200px; padding-right: 10px;"><?= $issuetype->getName(); ?>:</td>
                 <td style="padding-bottom: 2px; width: auto; position: relative;">
                     <div style="color: #222; position: absolute; right: 20px; text-align: right;"><?= __('%closed closed of %issues reported', array('%closed' => '<b>'.$project->countClosedIssuesByType($issuetype->getID()).'</b>', '%issues' => '<b>'.$project->countIssuesByType($issuetype->getID()).'</b>')); ?></div>
                     <?php include_component('main/percentbar', array('percent' => $project->getClosedPercentageByType($issuetype->getID()), 'height' => 20)); ?>
