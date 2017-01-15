@@ -19,6 +19,7 @@
     }
 
     try {
+        framework\Context::checkInstallMode();
         // Include the "engine" script, which initializes and sets up stuff
         \thebuggenie\core\framework\Context::bootstrap();
     } catch (Exception $e) {
@@ -39,8 +40,6 @@
         }
     }
     try {
-        framework\Context::checkInstallMode();
-
         foreach (framework\Context::getModules() as $module_name => $module) {
             $module_cli_path = THEBUGGENIE_MODULES_PATH . $module_name . DIRECTORY_SEPARATOR . 'cli' . DIRECTORY_SEPARATOR;
             if (file_exists($module_cli_path)) {
