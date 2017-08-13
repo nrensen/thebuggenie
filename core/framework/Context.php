@@ -1915,7 +1915,7 @@ class Context
                 $hostname = $_SERVER['HTTP_HOST'];
             }
 
-            if (!self::isUpgrademode() && !self::isInstallmode())
+            if (self::isUpgrademode() || !self::isInstallmode())
                 $scope = \thebuggenie\core\entities\tables\Scopes::getTable()->getByHostnameOrDefault($hostname);
 
             if (!$scope instanceof Scope)
