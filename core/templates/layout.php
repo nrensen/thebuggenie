@@ -115,6 +115,7 @@
                         'spectrum',
                         'prototype',
                         'effects',
+                        'dragdrop',
                         'controls',
                         'mention',
                         'scriptaculous',
@@ -153,6 +154,9 @@
                     'effects': {
                         deps: ['prototype']
                     },
+                    'dragdrop': {
+                        deps: ['effects']
+                    },
                     'controls': {
                         deps: ['effects']
                     },
@@ -190,14 +194,20 @@
                     'jquery.animate-enhanced<?= $minified ?>': {
                         deps: ['jquery']
                     },
-                     'jquery-ui': {
-                         deps: ['jquery.animate-enhanced<?= $minified ?>']
-                     },
-                     'dragdrop': {
-                         deps: ['effects']
-                     },
-                    deps: [<?= join(', ', array_map(function ($element) { return "\"{$element}\""; }, $localjs)); ?>]
-                }
+                    'jquery-ui': {
+                        deps: ['jquery.animate-enhanced<?= $minified ?>']
+                    },
+                    'dragdrop': {
+                        deps: ['effects']
+                    },
+                    'slider': {
+                        deps: ['prototype']
+                    },
+                    'tablekit': {
+                        deps: ['prototype']
+                    }
+                },
+                deps: [<?= join(', ', array_map(function ($element) { return "\"{$element}\""; }, $localjs)); ?>]
             };
         </script>
         <script data-main="thebuggenie" src="<?= make_url('home'); ?>js/require<?= $minified; ?>.js"></script>
