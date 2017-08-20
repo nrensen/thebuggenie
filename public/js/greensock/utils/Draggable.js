@@ -16,7 +16,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 
 	"use strict";
 
-	_gsScope._gsDefine("utils.Draggable", ["events.EventDispatcher","TweenLite","plugins.CSSPlugin"], function(EventDispatcher, TweenLite, CSSPlugin) {
+	_gsScope._gsDefine("utils.GSDraggable", ["events.EventDispatcher","TweenLite","plugins.CSSPlugin"], function(EventDispatcher, TweenLite, CSSPlugin) {
 
 		var _tempVarsXY = {css:{}}, //speed optimization - we reuse the same vars object for x/y TweenLite.set() calls to minimize garbage collection tasks and improve performance.
 			_tempVarsX = {css:{}},
@@ -2182,4 +2182,4 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 		require("../plugins/CSSPlugin.js");
 		module.exports = getGlobal();
 	}
-}("Draggable"));
+}("GSDraggable"));
