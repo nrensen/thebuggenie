@@ -10,16 +10,8 @@
 
         public function componentGeneral()
         {
-            $files = scandir(THEBUGGENIE_PATH . 'vendor' . DS . 'easybook' . DS . 'geshi' . DS . 'geshi' . DS);
-            $geshi_languages = array();
-            foreach ($files as $file)
-            {
-                if (mb_strstr($file, '.php') === false)
-                    continue;
-                $lang = str_replace('.php', '', $file);
-                $geshi_languages[$lang] = $lang;
-            }
-            $this->geshi_languages = $geshi_languages;
+            $highlighter = new \Highlight\Highlighter();
+            $this->geshi_languages = $highlighter->listLanguages();
         }
 
         public function componentUser()
