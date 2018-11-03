@@ -122,6 +122,9 @@
                         'slider',
                         'sound',
                         'tablekit',
+                        'calendarview',
+                        'builder',
+                        'excanvas',
                         \thebuggenie\core\framework\Settings::getThemeName() .'/theme',
                         'thebuggenie',
                         'thebuggenie/tbg',
@@ -131,7 +134,8 @@
                     <?php endforeach; ?>
                     'TweenMax': bust('greensock/TweenMax<?= $minified ?>'),
                     'TweenLite': bust('greensock/TweenLite<?= $minified ?>'),
-                    'GSDraggable': bust('greensock/utils/Draggable<?= $minified ?>')
+                    'GSDraggable': bust('greensock/utils/Draggable<?= $minified ?>'),
+                    'plugins.CSSPlugin': bust('greensock/plugins/CSSPlugin.<?= $minified ?>')
                 },
                 map: {
                     '*': { 'jquery': 'jquery-private' },
