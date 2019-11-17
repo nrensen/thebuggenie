@@ -9,7 +9,6 @@
         thebuggenie\modules\mailing\entities\IncomingEmailAccount,
         thebuggenie\modules\mailing\entities\tables\MailQueueTable,
         Swift_Message,
-        Swift_Mime_Message,
         Swift_Mailer,
         Swift_MailTransport,
         Swift_SmtpTransport,
@@ -292,7 +291,7 @@ EOT;
         public function getSwiftMessage($subject, $message_plain, $message_html)
         {
             require_once THEBUGGENIE_VENDOR_PATH . 'swiftmailer' . DS . 'swiftmailer' . DS . 'lib' . DS . 'swift_required.php';
-            $message = Swift_Message::newInstance();
+            $message = new Swift_Message();
             $message->setSubject($subject);
             $message->setFrom(array($this->getEmailFromAddress() => $this->getEmailFromName()));
             $message->setBody($message_plain);
@@ -524,7 +523,7 @@ EOT;
             return $users;
         }
 
-        protected function _addProjectEmailAddress(Swift_Mime_Message $message, Project $project = null)
+        protected function _addProjectEmailAddress(Swift_Message $message, Project $project = null)
         {
             if ($project instanceof Project)
             {
@@ -956,10 +955,10 @@ EOT;
                 switch ($this->getMailerType()) {
                     case self::MAIL_TYPE_SENDMAIL:
                         $command = $this->getSendmailCommand();
-                        $transport = ($command) ? Swift_SendmailTransport::newInstance($command) : Swift_SendmailTransport::newInstance();
+                        $transport = ($command) ? new Swift_SendmailTransport($command) : new Swift_SendmailTransport();
                         break;
                     case self::MAIL_TYPE_SMTP:
-                        $transport = Swift_SmtpTransport::newInstance($this->getSmtpHost(), $this->getSmtpPort());
+                        $transport = new Swift_SmtpTransport($this->getSmtpHost(), $this->getSmtpPort());
                         if ($this->getSmtpUsername())
                         {
                             $transport->setUsername($this->getSmtpUsername());
@@ -970,10 +969,10 @@ EOT;
                         break;
                     case self::MAIL_TYPE_PHP:
                     default:
-                        $transport = Swift_MailTransport::newInstance();
+                        $transport = new Swift_MailTransport();
                         break;
                 }
-                $mailer = Swift_Mailer::newInstance($transport);
+                $mailer = new Swift_Mailer($transport);
                 $this->mailer = $mailer;
             }
 
