@@ -22,7 +22,7 @@
      * @package thebuggenie
      * @subpackage main
      */
-    class TextParserMarkdown extends \Parsedown implements ContentParser
+    class TextParserMarkdown extends \Michelf\Markdown implements ContentParser
     {
         use TextParserTodo;
 
@@ -43,7 +43,7 @@
         public function transform($text)
         {
             $text = preg_replace_callback(TextParser::getIssueRegex(), array($this, '_parse_issuelink'), $text);
-            $text = parent::text($text);
+            $text = parent::transform($text);
             $text = preg_replace_callback('/^(?:\<(.*?)\>)?' . $this->todo_regex . '(?:\<(.*?)\>)?$/mi', [$this, '_parse_todo'], $text);
             $text = preg_replace_callback(TextParser::getMentionsRegex(), array($this, '_parse_mention'), $text);
             $text = preg_replace_callback(self::getStrikethroughRegex(), array($this, '_parse_strikethrough'), $text);
